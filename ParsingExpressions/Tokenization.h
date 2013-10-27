@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <iostream>
 
 std::vector<std::string> Tokenize(const std::string& str)
 {
@@ -28,14 +29,15 @@ std::vector<std::string> Tokenize(const std::string& str)
 			std::string token;
 			if (!currentNumber.empty())
 				tokens.push_back(currentNumber);
-			if (nextUnary && chr == '-')
+			if (nextUnary)
 				token.push_back('U');
 			token.push_back(chr);
 			tokens.push_back(token);
 			currentNumber.clear();
-			nextUnary = true;
+			if (chr != '(' && chr != ')')
+				nextUnary = true;
 		}
 	}
 
-	return std::move(tokens);
+	return tokens;
 }
