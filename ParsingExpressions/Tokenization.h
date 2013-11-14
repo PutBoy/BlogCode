@@ -11,7 +11,7 @@ std::vector<std::string> Tokenize(const std::string& str)
 	std::vector<std::string> tokens;
 	std::string currentNumber;
 	std::set<char> operators;
-	for (auto op : "+-/*()")
+	for (auto op : "+-/\\*()")
 	{
 		operators.insert(op);
 	}
@@ -38,6 +38,8 @@ std::vector<std::string> Tokenize(const std::string& str)
 				nextUnary = true;
 		}
 	}
+	if (!currentNumber.empty())
+		tokens.push_back(currentNumber);
 
 	return tokens;
 }
